@@ -1,0 +1,201 @@
+@import '_varibles.scss';
+
+main{
+    section{
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        margin: 0 2rem 0 2rem;
+
+        // * kart başlık css burada yazılıyor
+        .card-header{
+            background-color: rgba(112, 128, 144, 0.527);
+            width: 100%;
+            border-radius: 5px;
+            padding: 0.25rem;
+            box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.39);
+            h1{text-align: center;}
+
+            .card-body{
+                width: 100%;
+                text-align: center;
+                padding: 0.5rem;
+
+                .form > .input-group{
+                    display: flex;
+                    width: 100%;
+                    position: relative;
+
+                    .form-control{
+                        width: 100%;
+                        padding: 0.5rem;
+                        outline: none;
+                        font-family: map-get($font, primary);
+                        font-weight: 500;
+                        border: none;
+                    } .btn{
+                        position: absolute;
+                        right: 0;
+                        height: 100%;
+                        background-color: aquamarine;
+                        border: none;
+                        padding: 0 10px 0 10px;
+                        color: rgb(0, 0, 0);
+                        font-family: map-get($font, primary);
+                        text-transform: uppercase;
+                        font-weight: 600;
+                        cursor: pointer;
+                        transition: 500ms;
+                    } .btn:hover{
+                        background-color: chartreuse;
+                        color: rgb(110, 85, 250);
+                    }
+                }
+            }
+        }
+
+        // * kart ana burada yazılıyor
+        .card-task{
+            align-items: start;   
+            text-align: start;
+            padding: 1rem;
+            background-color: rgba(255, 255, 255, 0.205);
+            border-radius: 5px;
+            border: solid white 1px;
+            margin-top: 1rem;
+
+            .card-task-header{
+                width: 100%;
+                display: flex;
+                background: #00000050;
+                padding: 0.5rem;
+                border-radius: 5px;
+                justify-content: end;
+
+                .btn{
+                    background-color: rgb(255, 96, 96);
+                    border: none;
+                    padding: 0.25rem;
+                    color: rgb(255, 255, 255);
+                    font-family: map-get($font, primary);
+                    text-transform: uppercase;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: 500ms;
+                } .btn:hover{
+                    background-color: chartreuse;
+                    color: rgb(38, 0, 255);
+                }
+            }
+
+            .task-list{
+                .task{
+                    border-bottom: dashed 2px rgba(255, 255, 255, 0.5);
+                    border-top:    dashed 2px rgba(255, 255, 255, 0.5);
+                    padding: 0.75rem;
+                    margin: 0.5rem 0 0.5rem 0;
+                    margin-bottom: 2rem;
+                    display: flex;
+                    justify-content: space-between;
+
+                    // * buradaki kod en son li karakterine aşaağı bir boşluk vermez
+                    &:last-child{margin-bottom: 0;}
+
+                    // * burası işaretleme ve görev yazısının css bölümü
+                    .form-check{
+                        display: flex;
+                        align-items: center;
+
+                        // * varsayılan checkbox'ı kaldırır
+                        .form-check-input{display: none;}
+
+                        // * yeni checkbox düzeni
+                        .form-check-label{
+                            position: relative;
+                            padding-left: 2rem;
+                            cursor: pointer;
+                            font-family: mapg-get($font, secondary);
+                            text-transform: capitalize;
+                        } .form-check-label::before{
+                            content: '';
+                            display: inline-block;
+                            position: absolute;
+                            left: 0;
+                            right: 0;
+                            width: 1rem;
+                            height: 1rem;
+                            border: 2px solid white;
+                            border-radius: 5px;
+                            transition: 500ms;
+                        } .form-check-input:checked + .form-check-label::before{
+                            background-color: chartreuse;
+                            border-color: chartreuse;
+                        } .form-check-input:checked + .form-check-label{
+                            text-decoration: line-through;
+                            opacity: 75%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.dropdown{
+    position: relative;
+    display: inline-block;
+
+    
+    .dropdown-content-deactive{
+        display: none;
+    }
+    
+    // * primary btn
+    .btn-dropdown-primary{
+        background-color: aqua;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 2px;
+        cursor: pointer;
+    }
+
+    // * secondary btneler için
+    .dropdown-content-active{
+        position: absolute;
+        background-color: #f9f9f9;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        padding: 6px 10px;
+        z-index: 1;
+        display: flex; // bunu yaparak tam olarak yan yana sıraladım bu flex olması gerekli
+        flex-direction: column; // bunla ise üst üste gelmesini sağladım
+        gap: 7px;
+        border-radius: 5px;
+        margin-left: 15px;
+
+        .btn-dropdown-secondary{
+            flex: 1; // bu kodda bunu aynı boyuta getirdi
+            border: none;
+            padding: 5px;
+            color: white;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        // * btn delete
+        .btn-dropdown-secondary-delete{
+            background-color: rgb(250, 42, 42);
+        }
+
+        .btn-dropdown-secondary-rename{
+            background-color: rgb(57, 150, 119);
+        }
+    }  
+
+    /* Readme
+        yukarıda ki dropdown örneği önemli bunun sebebi tamamen aynı boyutta sıralamak için
+        bunu yapmak için ise şu kodları kullandım 
+    */
+}
