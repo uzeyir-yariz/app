@@ -141,61 +141,51 @@ main{
     }
 }
 
-.dropdown{
+.dropdown {
     position: relative;
     display: inline-block;
 
-    
-    .dropdown-content-deactive{
+    .dropdown-content {
         display: none;
     }
-    
-    // * primary btn
-    .btn-dropdown-primary{
+
+    .btn-dropdown-primary {
         background-color: aqua;
         border: none;
         padding: 5px 10px;
         border-radius: 2px;
         cursor: pointer;
     }
+}
 
-    // * secondary btneler için
-    .dropdown-content-active{
-        position: absolute;
-        background-color: #f9f9f9;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        padding: 6px 10px;
-        z-index: 1;
-        display: flex; // bunu yaparak tam olarak yan yana sıraladım bu flex olması gerekli
-        flex-direction: column; // bunla ise üst üste gelmesini sağladım
-        gap: 7px;
+.dropdown:hover .dropdown-content {
+    position: absolute;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 6px 10px;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    border-radius: 5px;
+    margin-left: 15px;
+
+    .btn-dropdown-secondary {
+        border: none;
+        padding: 5px;
+        color: white;
         border-radius: 5px;
-        margin-left: 15px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        cursor: pointer;
+    }
 
-        .btn-dropdown-secondary{
-            flex: 1; // bu kodda bunu aynı boyuta getirdi
-            border: none;
-            padding: 5px;
-            color: white;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            cursor: pointer;
-        }
+    .btn-dropdown-secondary-delete {
+        background-color: rgb(250, 42, 42);
+    }
 
-        // * btn delete
-        .btn-dropdown-secondary-delete{
-            background-color: rgb(250, 42, 42);
-        }
-
-        .btn-dropdown-secondary-rename{
-            background-color: rgb(57, 150, 119);
-        }
-    }  
-
-    /* Readme
-        yukarıda ki dropdown örneği önemli bunun sebebi tamamen aynı boyutta sıralamak için
-        bunu yapmak için ise şu kodları kullandım 
-    */
+    .btn-dropdown-secondary-rename {
+        background-color: rgb(57, 150, 119);
+    }
 }
