@@ -20,7 +20,7 @@ function displaytask(){
             </div>
             <div class="dropdown">
                 <button type="button" class="btn-dropdown-primary"><i class="fa-solid fa-ellipsis"></i></button>
-                <div class="dropdown-content dropdown-content-deactive">
+                <div class="dropdown-content">
                     <button onclick="delete_task(${gorev.id})" type="button" class="btn-dropdown-secondary-delete btn-dropdown-secondary"><i class="fa-solid fa-trash"></i> delete</button>
                     <button type="button" class="btn-dropdown-secondary-rename btn-dropdown-secondary"><i class="fa-solid fa-pen"></i> rename</button>
                 </div>
@@ -43,7 +43,6 @@ document.querySelector("#txt_task_name").addEventListener("keypress", function(e
 
 function newTask(event){
     event.preventDefault(); // Sayfanın yenilenmesini engelle
-    close_dropdown_contents();
 
     let task_input = document.querySelector("#txt_task_name");
 
@@ -66,11 +65,6 @@ function alldelete(){
 // ! silme bölümü
 function delete_task(id){
     let deleteTask;
-    /* for(let index in gorev_liste){
-        if(gorev_liste[index].id == id){
-            deleteTask = index;
-        }
-    } */
     deleteTask = gorev_liste.findIndex(function(gorev){
         return gorev.id == id;
     });
@@ -78,40 +72,3 @@ function delete_task(id){
     displaytask();
 }
 
-
-// ! dropdown bölümü açma kapam yeri
-const dropdown_btns = document.querySelectorAll(".btn-dropdown-primary"); // dropdown düğmelerini seçiyor
-const dropdown_contents = document.querySelectorAll(".dropdown-content"); // dropdown içeriklerini seçiyor
-
-// dropdown içeriklerini kapatan fonksiyon
-function close_dropdown_contents(){
-    dropdown_contents.forEach(function(content){
-        if(content.classList.contains("dropdown-content-active")){
-            content.classList.remove("dropdown-content-active");
-            content.classList.add("dropdown-content-deactive");
-        }
-    });
-}
-
-// her düğme için bir olay dinleyici
-dropdown_btns.forEach(function(btns) {
-    btns.addEventListener("click", function(e){
-        e.stopPropagation(); // * Dropdown düğmesine tıklanıldığında tıklama olayını durdur
-
-        const dropdown_content = this.nextElementSibling;
-
-        if(dropdown_content.classList.contains("dropdown-content-deactive")){
-            close_dropdown_contents();
-            dropdown_content.classList.remove("dropdown-content-deactive");
-            dropdown_content.classList.add("dropdown-content-active");
-        } else{
-            dropdown_content.classList.remove("dropdown-content-active");
-            dropdown_content.classList.add("dropdown-content-deactive");
-        }
-    });
-});
-
-// * eğer herhangi bir yere basılırsa dropdown menüsü kapanacak
-document.addEventListener("click", function(){
-    close_dropdown_contents();
-});
