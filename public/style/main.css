@@ -64,7 +64,8 @@ main section {
       background: #00000050;
       padding: 0.5rem;
       border-radius: 5px;
-      justify-content: end; }
+      justify-content: space-between;
+      align-items: center; }
       main section .card-task .card-task-header .btn {
         background-color: #ff6060;
         border: none;

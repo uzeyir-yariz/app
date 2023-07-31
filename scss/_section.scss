@@ -70,7 +70,8 @@ main{
                 background: #00000050;
                 padding: 0.5rem;
                 border-radius: 5px;
-                justify-content: end;
+                justify-content: space-between;
+                align-items: center;
 
                 .btn{
                     background-color: rgb(255, 96, 96);

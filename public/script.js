@@ -65,6 +65,7 @@ function newTask(event){
             }
         }
         task_input.value = "";
+        is_empty();
         displaytask();
     }
 }
@@ -85,6 +86,9 @@ function edit_task(task_id, task_name){
 document.querySelector("#btn_clear").addEventListener("click", alldelete);
 function alldelete(){
     gorev_liste.splice(0);
+
+    is_empty();
+
     displaytask();
 }
 
@@ -95,6 +99,24 @@ function delete_task(id){
         return gorev.id == id;
     });
     gorev_liste.splice(deleteTask, 1);
+    is_empty();
     displaytask();
 }
 
+function is_empty() {
+    let cont = document.getElementById("card-task-header");
+
+    if (gorev_liste.length === 0) {
+        let h4 = `
+        <h4 class="empty_alert_mesage" id="empty_alert_mesage">hmm... empty</h4>
+        `;
+
+        cont.insertAdjacentHTML("afterbegin", h4);
+    } else {
+        // "empty_alert_mesage" sınıfına sahip elementi seçelim
+        let existingMessage = document.querySelector(".empty_alert_mesage");
+        if (existingMessage) {
+            existingMessage.remove();
+        }
+    }
+}
