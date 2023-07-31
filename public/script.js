@@ -5,6 +5,10 @@ let gorev_liste = [
     {"id": 4, "gorevadi": "görev 4"}, 
 ];
 
+let edit_id;
+let is_edit_task = false;
+let task_input = document.querySelector("#txt_task_name");
+
 displaytask();
 function displaytask(){
     let ul = document.getElementById("task-list");
@@ -22,7 +26,7 @@ function displaytask(){
                 <button type="button" class="btn-dropdown-primary"><i class="fa-solid fa-ellipsis"></i></button>
                 <div class="dropdown-content">
                     <button onclick="delete_task(${gorev.id})" type="button" class="btn-dropdown-secondary-delete btn-dropdown-secondary"><i class="fa-solid fa-trash"></i> delete</button>
-                    <button type="button" class="btn-dropdown-secondary-rename btn-dropdown-secondary"><i class="fa-solid fa-pen"></i> rename</button>
+                    <button onclick='edit_task(${gorev.id}, "${gorev.gorevadi}")' type="button" class="btn-dropdown-secondary-rename btn-dropdown-secondary"><i class="fa-solid fa-pen"></i> rename</button>
                 </div>
             </div>
         </li>
@@ -37,22 +41,44 @@ document.querySelector("#btn_Add_new_task").addEventListener("click", newTask);
 document.querySelector("#txt_task_name").addEventListener("keypress", function(e){
     if(event.key == "Enter"){
         document.getElementById("btn_Add_new_task").click();
-        e.preventDefault(); // Sayfanın yenilenmesini engelle
+        e.preventDefault(); // sayfanın yenilenmesini engeller
     }
 });
 
 function newTask(event){
-    event.preventDefault(); // Sayfanın yenilenmesini engelle
+    event.preventDefault(); // sayfanın yenilenmesini engeller
 
-    let task_input = document.querySelector("#txt_task_name");
 
     if(task_input.value === ""){
         alert("Lütfen görev adını belirleyin...");
     } else{
-        gorev_liste.push({"id": gorev_liste.length + 1, "gorevadi": task_input.value});
+        if(!is_edit_task){
+            // * görev ekelenecek alan
+            gorev_liste.push({"id": gorev_liste.length + 1, "gorevadi": task_input.value});
+        } else{
+            // * güncelleme yapılacak alan
+            for(let gorev of gorev_liste){
+                if(gorev.id == edit_id){ 
+                    gorev.gorevadi = task_input.value;
+                }
+                is_edit_task = false;
+            }
+        }
         task_input.value = "";
         displaytask();
     }
+}
+
+// ! edit bölümü
+function edit_task(task_id, task_name){
+    edit_id = task_id;
+    is_edit_task = true;
+    task_input.value = task_name;
+    task_input.focus();
+
+    console.log("edit id : ", edit_id);
+    console.log("is edit mod : ", is_edit_task);
+
 }
 
 // ! temizleme bölünü
