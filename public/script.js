@@ -1,8 +1,8 @@
 let gorev_liste = [
-    {"id": 1, "gorevadi": "görev 1"}, 
-    {"id": 2, "gorevadi": "görev 2"}, 
-    {"id": 3, "gorevadi": "görev 3"}, 
-    {"id": 4, "gorevadi": "görev 4"}, 
+    {"id": 1, "gorevadi": "görev 1", "durum": "complete"}, 
+    {"id": 2, "gorevadi": "görev 2", "durum": "pending"}, 
+    {"id": 3, "gorevadi": "görev 3", "durum": "complete"}, 
+    {"id": 4, "gorevadi": "görev 4", "durum": "pending"}, 
 ];
 
 let edit_id;
@@ -15,11 +15,14 @@ function displaytask(){
 
     ul.innerHTML = "";
 
+    // bu kod yapılmamışları öncelikli sıraya alır 
+    gorev_liste.sort((a, b) => (a.durum === "complete" && b.durum !== "complete") ? 1 : -1);
+
     for(let gorev of gorev_liste){
         let li = `
         <li class="task">
             <div class="form-check">
-                <input type="checkbox" name="${gorev.id}" id="${gorev.id}" class="form-check-input">
+                <input type="checkbox" ${gorev.durum === "complete" ? "checked" : ""} onclick="update_status(checkbox)" name="${gorev.id}" id="${gorev.id}" class="form-check-input">
                 <label for="${gorev.id}" class="form-check-label">${gorev.gorevadi}</label>
             </div>
             <div class="dropdown">
@@ -119,4 +122,17 @@ function is_empty() {
             existingMessage.remove();
         }
     }
+}
+
+// ! drum güncelleme bölümü 
+function update_status(checkbox){
+    const taskId = parseInt(checkbox.id);
+
+    const task = gorev_liste.find(gorev => gorev.id === taskId);
+
+    if(task){
+        task.durum = checkbox.checked ? "complete" : "pending";
+    }
+
+    displaytask();
 }
